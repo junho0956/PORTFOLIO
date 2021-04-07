@@ -6,6 +6,14 @@ function makeHeaderItem(strings){
     item.style.fontWeight = '400';
     item.href = '#'+strings;
 
+    item.addEventListener('mouseenter', () => {
+        item.style.color = 'white';
+    });
+
+    item.addEventListener('mouseleave', () => {
+        item.style.color = 'lightgrey';
+    })
+
     return item;
 }
 
@@ -213,9 +221,9 @@ function makeProject(){
             info: '동아리를 주제로 다루는 커뮤니티를 만들어 보았습니다.',
             url: 'https://github.com/junho0956/Graduate-project',
             imgdata:[
-                './img/project/clava.PNG',
-                './img/project/clavaImg1.PNG',
-                './img/project/clavaImg2.PNG',
+                './img/project/clava.png',
+                './img/project/clavaImg1.png',
+                './img/project/clavaImg2.png',
             ],
         },
         {
