@@ -133,10 +133,10 @@ function makeAboutme(){
     let experInfo = [];
 
     certifiInfo.push(makeInfo('2020.08.28', '정보처리기사'));
-    experInfo.push(makeInfo('2020.09 ~ 2020.12', '디지털사이니지 스타트업 ELGO에서 근무'));
+    experInfo.push(makeInfo('2019.09 ~ 2019.12', '디지털사이니지 스타트업 ELGO에서 근무'));
     experInfo.push(makeInfo('2019.11','ACM-ICPC Seoul Regional 참가'));
     experInfo.push(makeInfo('2019.12','2019 SoftWave 참가'));
-    experInfo.push(makeInfo('2020.12','교내 프로그래밍 경진대회 최우수상'));
+    experInfo.push(makeInfo('2020.12','교내 프로그래밍 경진대회 우수상'));
     experInfo.push(makeInfo('2021.02 ~ 2021.03', '부산 프로그래밍 동아리 DnD 4기'));
 
     certifiInfo.forEach(item => {
