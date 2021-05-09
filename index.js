@@ -30,12 +30,31 @@ async function makeTop(){
     const top = document.querySelector('.top-container');
     top.id = 'Home';
     const imgs = document.createElement('img');
-    imgs.style.cssText = 'width:100vw; height:100vh;';
+    imgs.style.cssText = 'width:100vw;';
+
+    let width = document.documentElement.clientWidth;
+    if(width <= 768) {
+        imgs.style.height = '50vh';
+        top.style.height = '50vh';
+    }else {
+        imgs.style.height = '100vh';
+        top.style.height = '100vh';
+    }
     imgs.src = './img/halgatewood-com-Pr578ZCufII-unsplash.jpg';
+    imgs.className = 'HomeImage';
+
     top.appendChild(imgs);
 
     const top_introduce = document.createElement('div');
-    top_introduce.style.cssText = 'position:absolute; bottom:10vh; left:70vw; display:flex; align-items:flex-end;';
+    top_introduce.className = 'topintroduce';
+    top_introduce.style.cssText = 'position:absolute; bottom:10vh; display:flex; align-items:flex-end;';
+
+    if(width <= 768){
+        top_introduce.style.left = '50vw';
+    }
+    else{
+        top_introduce.style.left = '60vw';
+    }
 
     top.appendChild(top_introduce);
 
@@ -70,13 +89,27 @@ async function makeTop(){
 }
 
 function makeAboutme(){
+    const width = document.documentElement.clientWidth;
+
     const aboutme = document.querySelector('.aboutme-container');
     aboutme.id = 'AboutMe';
+
     const aboutmeTitle = document.createElement('div');
+    aboutmeTitle.className = 'aboutmeTitle';
     aboutmeTitle.style.cssText = 'width:70vw; display:flex; margin:5vh 0;';
+    
     const titleHeader = document.createElement('div');
     const titleMain = document.createElement('div');
-    titleHeader.style.cssText = 'font-size:3rem; font-weight:500; width:20vw;';
+    titleHeader.className = "titleHeader";
+    titleMain.className = 'titleMain';
+    titleHeader.style.cssText = 'font-size:2.7rem; font-weight:500;';
+    if(width <= 768){
+        titleHeader.style.width = 'auto';
+    }
+    else{
+        titleHeader.style.width = '20vw';
+    }
+
     titleMain.style.cssText = 'display:flex; flex-direction:column; font-size:1.2rem;';
     titleHeader.innerHTML = '# ABOUT ME';
     const main1 = document.createElement('p'); main1.style.margin = '0';
@@ -85,31 +118,46 @@ function makeAboutme(){
     main1.innerHTML = '안녕하세요🖐 프론트엔드 개발자를 꿈꾸는 김준호입니다.'
     main2.innerHTML = '새로운 지식을 얻는 재미를 통해 매일 즐겁게 코딩하고 있습니다.';
     main3.innerHTML = '꾸준한 성장으로 더욱 실력있는 개발자가 되기 위해 노력하겠습니다.';
-    titleMain.appendChild(main1);
-    titleMain.appendChild(main2);
-    titleMain.appendChild(main3);
-    aboutmeTitle.appendChild(titleHeader);
-    aboutmeTitle.appendChild(titleMain);
-    aboutme.appendChild(aboutmeTitle);
+    // titleMain.appendChild(main1);
+    // titleMain.appendChild(main2);
+    // titleMain.appendChild(main3);
+
+    // aboutmeTitle.appendChild(titleHeader);
+    // aboutmeTitle.appendChild(titleMain);
+    
+    // aboutme.appendChild(aboutmeTitle);
 
     const certificate = document.createElement('div');
+    certificate.className = 'certificate';
     certificate.style.cssText = 'width:70vw; display:flex; margin:2vh 0;';
     const certifiTitle = document.createElement('div');
+    certifiTitle.className = 'certifiTitle';
     certifiTitle.innerHTML = '# Certificate';
     certifiTitle.style.cssText = 'font-size:2rem; font-weight:500; width:20vw;';
-    certificate.appendChild(certifiTitle);
+    // certificate.appendChild(certifiTitle);
 
     const experience = document.createElement('div');
+    experience.className = 'experience';
     experience.style.cssText = 'width:70vw; display:flex; margin:2vh 0;';
     const experTitle = document.createElement('div');
+    experTitle.className = 'experTitle';
     experTitle.innerHTML = '# Experience';
     experTitle.style.cssText = 'font-size:2rem; font-weight:500; width:20vw;';
-    experience.appendChild(experTitle);
+    // experience.appendChild(experTitle);
+
+    if(width <= 768){
+        certifiTitle.style.width = 'auto';
+        experTitle.style.width = 'auto';
+    }
+    else{
+        certifiTitle.style.width = '20vw';
+        experTitle.style.width = '20vw';
+    }
 
     const experMain = document.createElement('div');
     const certifiMain = document.createElement('div');
     experMain.style.cssText = 'display:flex; flex-direction:column;';
-    certifiMain.style.cssText = 'display:flex; flex-direction:column;';
+    certifiMain.style.cssText = 'display:flex; flex-direction:column; justify-content:center';
 
     function joinInfo(p, c){
         p.appendChild(c);
@@ -133,9 +181,8 @@ function makeAboutme(){
     let experInfo = [];
 
     certifiInfo.push(makeInfo('2020.08.28', '정보처리기사'));
-    experInfo.push(makeInfo('2019.09 ~ 2019.12', '디지털사이니지 스타트업 ELGO에서 근무'));
-    experInfo.push(makeInfo('2019.11','ACM-ICPC Seoul Regional 참가'));
-    experInfo.push(makeInfo('2019.12','2019 SoftWave 참가'));
+    experInfo.push(makeInfo('2019.11','ACM-ICPC Seoul Regional 본선'));
+    experInfo.push(makeInfo('2019.12','2019 SoftWave'));
     experInfo.push(makeInfo('2020.12','교내 프로그래밍 경진대회 우수상'));
     experInfo.push(makeInfo('2021.02 ~ 2021.03', '부산 프로그래밍 동아리 DnD 4기'));
 
@@ -145,6 +192,25 @@ function makeAboutme(){
     experInfo.forEach(item => {
         joinInfo(experMain, item);
     })
+
+    // window.addEventListener('resize', () => {
+    //     const width = document.documentElement.clientWidth;
+    //     if(width <= 768){
+            
+    //     }
+    // })
+
+    titleMain.appendChild(main1);
+    titleMain.appendChild(main2);
+    titleMain.appendChild(main3);
+
+    aboutmeTitle.appendChild(titleHeader);
+    aboutmeTitle.appendChild(titleMain);
+    
+    aboutme.appendChild(aboutmeTitle);
+
+    certificate.appendChild(certifiTitle);
+    experience.appendChild(experTitle);
 
     certificate.appendChild(certifiMain);
     experience.appendChild(experMain);
@@ -162,22 +228,38 @@ function makeSkill(){
     skillTitle.style.cssText = 'font-size:3rem; font-weight:500; width:70vw; margin:5vh 0;';
     skillContainer.appendChild(skillTitle);
 
-    let myskill = ['./img/html.png','./img/css.png','./img/js.png','./img/ts.png','./img/react.png','./img/redux.png','./img/styled.png','./img/node.png'];
+    let mypublish = ['./img/html.png', './img/css.png','./img/js.png','./img/ts.png', './img/styled.png'];
+    let myfront = ['./img/react.png','./img/redux.png','./img/redux-saga.png','./img/next.png'];
+    let myback = ['./img/node.png','./img/express.png'];
 
     function makeItem(item){
         const res = document.createElement('img');
         res.src = item;
-        res.style.cssText = 'width:12vh; height:12vh; border-radius:10px; box-shadow: 2px 2px 2px grey;';
+        res.style.cssText = 'background-color:transparent; width:12vh; height:12vh; border-radius:10px; box-shadow: 2px 2px 2px grey; margin:10px;';
         return res;
     }
 
-    const skills = document.createElement('div');
-    skills.style.cssText = 'width:70vw; display:flex; flex-wrap:wrap; justify-content:space-around;';
-    myskill.forEach(item => {
-        skills.appendChild(makeItem(item));
+    const publish = document.createElement('div');
+    publish.style.cssText = 'width:70vw; display:flex; flex-wrap:wrap; ';
+    mypublish.forEach(item => {
+        publish.appendChild(makeItem(item));
     })
 
-    skillContainer.appendChild(skills);
+    const front = document.createElement('div');
+    front.style.cssText = 'width:70vw; display:flex; flex-wrap:wrap; ';
+    myfront.forEach(item => {
+        front.appendChild(makeItem(item));
+    })
+
+    const back = document.createElement('div');
+    back.style.cssText = 'width:70vw; display:flex; flex-wrap:wrap; ';
+    myback.forEach(item => {
+        back.appendChild(makeItem(item));
+    })
+
+    skillContainer.appendChild(publish);
+    skillContainer.appendChild(front);
+    skillContainer.appendChild(back);
 }
 
 function makeProject(){
@@ -198,7 +280,7 @@ function makeProject(){
             img: './img/project/moagym.PNG',
             name: 'Moagym',
             date: '2021.03 ~ 2021.04',
-            skill: 'React, Redux, styled-component',
+            skill: 'React, Redux, Typescript, styled-component',
             info: 'MoaGym 은 무신사 같은 국내 의류 쇼핑몰처럼 헬스, 요가, 필라테스 등의 의류 만을 모아서 보여주자는 의미로 시작한 프로젝트입니다.',
             url: 'https://github.com/junho0956/MoaGym',
             imgdata:[
@@ -214,49 +296,59 @@ function makeProject(){
             ],
         },
         {
-            img: './img/project/clava.png',
-            name: 'Clava',
-            date: '2020.11 ~ 2020.11',
-            skill: 'React',
-            info: '동아리를 주제로 다루는 커뮤니티를 만들어 보았습니다.',
-            url: 'https://github.com/junho0956/Graduate-project',
-            imgdata:[
-                './img/project/clava.png',
-                './img/project/clavaImg1.png',
-                './img/project/clavaImg2.png',
-            ],
-        },
-        {
-            img: './img/project/duggy.PNG',
-            name: 'Duggy-Music',
-            date: '2020.08 ~ 2020.08',
-            skill: 'React, firebase',
-            info: '지인의 유튜브 음원을 이용해서 쇼핑몰을 만들어 보았습니다.',
-            url: 'https://github.com/junho0956/duggy',
-            imgdata:[
-                './img/project/duggy.PNG',
-                './img/project/duggy1.PNG',
-                './img/project/duggy3.PNG',
-                './img/project/duggy4.PNG',
-            ],
+            img: './img/project/nodebird.PNG',
+            name: 'study project',
+            date: '2021.05.01 ~ 진행 중',
+            skill: `React, Redux, Redux-saga, styled-component, Next, Node, Express, swr`,
+            info: '개인 공부용 프로젝트입니다. 웹 개발의 전체적인 과정을 경험하기 위해 프론트 및 백엔드 전부 구현 중이며, Next를 통한 서버사이드 렌더링을 공부하기 위해 진행 중입니다.',
+            url: 'https://github.com/junho0956/practice-SSR',
+            imgdata: [],
         }
+        // {
+        //     img: './img/project/clava.png',
+        //     name: 'Clava',
+        //     date: '2020.11 ~ 2020.11',
+        //     skill: 'React',
+        //     info: '동아리를 주제로 다루는 커뮤니티를 만들어 보았습니다.',
+        //     url: 'https://github.com/junho0956/Graduate-project',
+        //     imgdata:[
+        //         './img/project/clava.png',
+        //         './img/project/clavaImg1.png',
+        //         './img/project/clavaImg2.png',
+        //     ],
+        // },
+        // {
+        //     img: './img/project/duggy.PNG',
+        //     name: 'Duggy-Music',
+        //     date: '2020.08 ~ 2020.08',
+        //     skill: 'React, firebase',
+        //     info: '지인의 유튜브 음원을 이용해서 쇼핑몰을 만들어 보았습니다.',
+        //     url: 'https://github.com/junho0956/duggy',
+        //     imgdata:[
+        //         './img/project/duggy.PNG',
+        //         './img/project/duggy1.PNG',
+        //         './img/project/duggy3.PNG',
+        //         './img/project/duggy4.PNG',
+        //     ],
+        // }
     ]
 
     function makeProjectSlide(data){
         const slideContainer = document.createElement('div');
-        slideContainer.style.cssText = 'position:relative; display:none; width:30vw; height:40vh;';
+        slideContainer.style.cssText = 'position:relative; display:none; width:30vw; height:45vh;';
 
         const slideUlContainer = document.createElement('div');
-        slideUlContainer.style.cssText = 'overflow:hidden;';
+        slideUlContainer.style.cssText = 'overflow:hidden; height:100%;';
 
         const slideUl = document.createElement('ul');
-        slideUl.style.cssText = `display:flex; transition:0.5s; list-style:none; padding:0; margin:0;`;
+        slideUl.style.cssText = `display:flex; height:100%; transition:0.5s; list-style:none; padding:0; margin:0;`;
         slideUl.style.width = `${data.length * 100}%`;
 
         function makeLi(image){
             const li = document.createElement('li');
             const img = document.createElement('img');
             img.src = image;
+            img.style.cssText = "width:100%; height:100%;";
             li.appendChild(img);
             return li;
         }
@@ -266,7 +358,7 @@ function makeProject(){
         })
 
         slideUl.childNodes.forEach(res => {
-            res.children[0].style.cssText = 'width:30vw; height:40vh;';
+            res.children[0].style.cssText = 'width:30vw; height:100%;';
         })
 
         slideUlContainer.appendChild(slideUl);
@@ -306,11 +398,11 @@ function makeProject(){
 
     function makeProjectItem(data){
         const wrap = document.createElement('div');
-        wrap.style.cssText = 'display:flex; width:60vw; height:40vh; background-color: white; box-shadow:3px 3px 3px grey; margin:5vh;';
+        wrap.style.cssText = 'display:flex; width:60vw; height:45vh; background-color: white; box-shadow:3px 3px 3px grey; margin:5vh;';
 
         const img = document.createElement('img');
         img.src = data.img;
-        img.style.cssText = 'width:30vw; height:40vh;';
+        img.style.cssText = 'width:30vw;';
         const slider = makeProjectSlide(data.imgdata);
         wrap.appendChild(img);
         wrap.appendChild(slider);
@@ -329,6 +421,7 @@ function makeProject(){
         })
 
         const info = document.createElement('div');
+        info.className = 'info';
         info.style.cssText = 'padding:2.5vw; width:25vw; display:flex; flex-direction:column;';
 
         const pname = document.createElement('div');
@@ -362,6 +455,26 @@ function makeProject(){
 
         wrap.appendChild(info);
 
+        const width = document.documentElement.clientWidth;
+        if(width <= 768){
+            wrap.childNodes[0].style.width = "60vw";
+            wrap.childNodes[2].style.width = '55vw';
+            wrap.childNodes[2].style.display = 'none';
+            wrap.childNodes[2].childNodes.forEach(item => {
+                item.style.fontSize = '1.2rem';
+            })
+            wrap.childNodes[2].childNodes[0].style.fontSize = '2rem';
+            wrap.childNodes[0].addEventListener('mouseenter', () => {
+                wrap.childNodes[0].style.display = 'none';
+                wrap.childNodes[1].style.display = 'none';
+                wrap.childNodes[2].style.display = 'block';
+            })
+            wrap.childNodes[2].addEventListener('mouseleave', () => {
+                wrap.childNodes[2].style.display = 'none';
+                wrap.childNodes[0].style.display = 'block';
+            })
+        }
+
         return wrap;
     }
 
@@ -392,14 +505,14 @@ function makeContact(){
 
     const email = document.createElement('div');
     email.innerHTML = 'Email : junho0956@naver.com';
-    const phone = document.createElement('div');
-    phone.innerHTML = 'Phone : 010-9457-4773';
+    // const phone = document.createElement('div');
+    // phone.innerHTML = 'Phone : 010-9457-4773';
     const git = document.createElement('div');
     git.innerHTML = 'Github ';
     
     git.style.cssText = 'font-size:1.5rem; width:70vw; margin-bottom:3vh;';
     email.style.cssText = 'font-size:1.5rem; width:70vw; margin-bottom:3vh;';
-    phone.style.cssText = 'font-size:1.5rem; width:70vw; margin-bottom:3vh;';
+    // phone.style.cssText = 'font-size:1.5rem; width:70vw; margin-bottom:3vh;';
 
     const github = document.createElement('i');
     github.style.cssText = 'font-size:2rem; cursor:pointer;'
@@ -411,7 +524,7 @@ function makeContact(){
 
     contact.appendChild(git);
     contact.appendChild(email);
-    contact.appendChild(phone);
+    // contact.appendChild(phone);
 }
 
 function init(){
@@ -421,6 +534,33 @@ function init(){
     makeSkill();
     makeProject();
     makeContact();
+
+    const topintro = document.querySelector('.topintroduce');
+    const topcontainer = document.querySelector('.top-container');
+    const topImage = document.querySelector('.HomeImage');
+    const titleHeader = document.querySelector('.titleHeader');
+    const certifiTitle = document.querySelector('.certifiTitle');
+    const experTitle = document.querySelector('.experTitle');
+
+    window.addEventListener('resize', () => {
+        const width = document.documentElement.clientWidth;
+        if(width <= 768){
+            topintro.style.left = '50vw';
+            topcontainer.style.height = '50vh';
+            topImage.style.height = '50vh';
+            titleHeader.style.width = 'auto';
+            certifiTitle.style.width = 'auto';
+            experTitle.style.width = 'auto';
+        }
+        else{
+            topintro.style.left = '60vw';
+            topcontainer.style.height = '100vh';
+            topImage.style.height = '100vh';
+            titleHeader.style.width = '20vw';
+            certifiTitle.style.width = '20vw';
+            experTitle.style.width = '20vw';
+        }
+    })
 }
 
 init();
