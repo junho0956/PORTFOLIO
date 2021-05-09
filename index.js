@@ -2,6 +2,7 @@
 function makeHeaderItem(strings){
     const item = document.createElement('a');
     item.innerHTML = strings;
+    item.style.display = 'block';
     item.style.color = 'lightgrey';
     item.style.fontWeight = '400';
     item.href = '#'+strings;
@@ -20,9 +21,73 @@ function makeHeaderItem(strings){
 function makeHeader(){
     const header = document.querySelector('.header-container');
     const needItem = ['Home','AboutMe','Skill','Project','Contact'];
+
     needItem.forEach(item => {
         const getItem = makeHeaderItem(item);
         header.appendChild(getItem);
+    })
+
+    const dropheader = document.createElement('div');
+    dropheader.className = 'dropheader';
+    dropheader.style.cssText = "display:none; position:fixed; top:0; right:5vw; background-color:dimgrey; border-bottom-left-radius:10px; border-bottom-right-radius:10px; opacity:0.6; z-index:9999;";
+
+    dropheader.style.width = '20vw';
+    dropheader.style.height = '6vh';
+
+    const dropbtn = document.createElement('i');
+    dropbtn.className = 'fas fa-bars';
+    dropbtn.style.cssText = 'font-size:1.5rem; cursor:pointer; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); ';
+
+    const dropdownContent = document.createElement('div');
+    dropdownContent.className = 'dropdownContent';
+    dropdownContent.style.cssText = 'display:none; position:absolute; height:30vh; z-index:1; transition:1s; top:6vh;';
+
+    needItem.forEach(item => {
+        const getitem = makeHeaderItem(item);
+        getitem.style.width = "20vw";
+        getitem.style.height = '6vh';
+        getitem.style.backgroundColor = 'dimgrey';
+        getitem.style.display = 'flex';
+        getitem.style.justifyContent = 'center';
+        getitem.style.alignItems = 'center';
+        dropdownContent.appendChild(getitem);
+    })
+
+    dropdownContent.children[4].style.borderBottomLeftRadius = '10px';
+    dropdownContent.children[4].style.borderBottomRightRadius = '10px';
+
+    dropbtn.addEventListener('click', () => {
+        dropdownContent.classList.toggle("drop-down-show");
+        if(dropdownContent.classList.contains('drop-down-show')){
+            dropdownContent.style.display = 'block';
+            dropheader.style.borderBottomLeftRadius = '0';
+            dropheader.style.borderBottomRightRadius = '0';
+        }
+        else{
+            dropdownContent.style.display = 'none';
+            dropheader.style.borderBottomLeftRadius = '10px';
+            dropheader.style.borderBottomRightRadius = '10px';
+        }
+    })
+
+    dropheader.appendChild(dropbtn);
+    dropheader.appendChild(dropdownContent);
+    document.querySelector('.container').appendChild(dropheader);
+
+    if(document.documentElement.clientWidth <= 768){
+        header.style.display = 'none';
+        dropheader.style.display = 'inline-block';
+    }
+
+    window.addEventListener('resize', () => {
+        if(document.documentElement.clientWidth <= 768){
+            header.style.display = 'none';
+            dropheader.style.display = 'inline-block';
+        }
+        else{
+            header.style.display = 'flex';
+            dropheader.style.display = 'none';
+        }
     })
 }
 
@@ -40,7 +105,13 @@ async function makeTop(){
         imgs.style.height = '100vh';
         top.style.height = '100vh';
     }
-    imgs.src = './img/halgatewood-com-Pr578ZCufII-unsplash.jpg';
+    if(width <= 768){
+        imgs.src = './img/thomas-tastet-hSODeSbvzE0-unsplash.jpg';
+    }
+    else{
+        imgs.src = './img/halgatewood-com-Pr578ZCufII-unsplash.jpg';
+    }
+    // imgs.src = './img/halgatewood-com-Pr578ZCufII-unsplash.jpg';
     imgs.className = 'HomeImage';
 
     top.appendChild(imgs);
@@ -50,7 +121,7 @@ async function makeTop(){
     top_introduce.style.cssText = 'position:absolute; bottom:10vh; display:flex; align-items:flex-end;';
 
     if(width <= 768){
-        top_introduce.style.left = '50vw';
+        top_introduce.style.left = '10vw';
     }
     else{
         top_introduce.style.left = '60vw';
@@ -64,10 +135,21 @@ async function makeTop(){
     const name = ['김','준','호'];
 
     top_job.style.cssText = 'color:white; font-size:1.5rem; margin-right:20px; padding-bottom:5px;';
-    top_name.style.cssText = 'color:white; font-size:3rem;';
+    top_name.style.cssText = 'color:white; font-size:3rem; margin-right:20px;';
 
-    top_introduce.appendChild(top_job);
-    top_introduce.appendChild(top_name);
+    if(width <= 768){
+        // top_job.style.marginRight = 0;
+        // top_job.style.padding = 0;
+        // top_name.style.marginRight = 0;
+        // top_name.style.padding = 0;
+        // top_job.style.height = '4vh';
+        // top_name.style.height = '4vh';
+        // top_introduce.style.alignItems = 'flex-start';
+        // top_introduce.style.bottom = '5vh';
+        top_introduce.style.bottom = "50%";
+        top_job.style.textShadow = 'black 0 0 25px';
+        top_name.style.textShadow = 'black 0 0 25px';
+    }
     
     function writing(el, text, end){
         let idx = 0;
@@ -81,6 +163,9 @@ async function makeTop(){
             }, 200);
         });
     }
+
+    top_introduce.appendChild(top_job);
+    top_introduce.appendChild(top_name);
 
     writing(top_job, job, 18).then(() => {
         writing(top_name, name, 3);
@@ -368,8 +453,8 @@ function makeProject(){
         const rightbutton = document.createElement('i');
         leftbutton.className = 'fas fa-chevron-left';
         rightbutton.className = 'fas fa-chevron-right';
-        leftbutton.style.cssText = 'position:absolute; width:2vh; height:2vh; font-size:2rem; top:50%; left:2vw; transparent(-50%, -50%);';
-        rightbutton.style.cssText = 'position:absolute; width:2vh; height:2vh; font-size:2rem; top:50%; right:2vw; transparent(-50%, -50%);';
+        leftbutton.style.cssText = 'position:absolute; width:2vh; height:2vh; font-size:2rem; top:50%; left:2vw; translate:transform(-50%, -50%);';
+        rightbutton.style.cssText = 'position:absolute; width:2vh; height:2vh; font-size:2rem; top:50%; right:2vw; translate:transform(-50%, -50%);';
 
         let pos = 0;
         leftbutton.style.display = "none";
@@ -545,7 +630,8 @@ function init(){
     window.addEventListener('resize', () => {
         const width = document.documentElement.clientWidth;
         if(width <= 768){
-            topintro.style.left = '50vw';
+            topintro.style.left = '10vw';
+            topintro.style.bottom = '50%';
             topcontainer.style.height = '50vh';
             topImage.style.height = '50vh';
             titleHeader.style.width = 'auto';
@@ -554,6 +640,7 @@ function init(){
         }
         else{
             topintro.style.left = '60vw';
+            topintro.style.bottom = '10vh';
             topcontainer.style.height = '100vh';
             topImage.style.height = '100vh';
             titleHeader.style.width = '20vw';

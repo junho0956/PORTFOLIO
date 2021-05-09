@@ -7,7 +7,6 @@ body{
     height:100vh;
     position:relative;
     font-family: 'Roboto', sans-serif;
-    transition:0.5s;
 }
 
 a{
@@ -16,6 +15,10 @@ a{
 
 .container{
     position:relative;
+}
+
+.drop-down-show{
+    display:block;
 }
 
 .header-container{
