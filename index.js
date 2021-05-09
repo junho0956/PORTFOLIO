@@ -240,7 +240,9 @@ function makeAboutme(){
     }
 
     const experMain = document.createElement('div');
+    experMain.className = 'experMain';
     const certifiMain = document.createElement('div');
+    certifiMain.className = 'certifiMain';
     experMain.style.cssText = 'display:flex; flex-direction:column;';
     certifiMain.style.cssText = 'display:flex; flex-direction:column; justify-content:center';
 
@@ -252,8 +254,8 @@ function makeAboutme(){
         const newEl = document.createElement('div');
         const dateEl = document.createElement('div');
         const infoEl = document.createElement('div');
-        newEl.style.cssText = 'display:flex; font-size:1rem; width:50vw;';
-        dateEl.style.cssText = 'width:15vw;';
+        newEl.style.cssText = 'display:flex; font-size:1rem; width:auto;';
+        dateEl.style.cssText = 'width:15vw; margin-right:10px;';
         infoEl.style.cssText = 'width:35vw';
         dateEl.innerHTML = date;
         infoEl.innerHTML = info;
@@ -278,12 +280,14 @@ function makeAboutme(){
         joinInfo(experMain, item);
     })
 
-    // window.addEventListener('resize', () => {
-    //     const width = document.documentElement.clientWidth;
-    //     if(width <= 768){
-            
-    //     }
-    // })
+    if(width <= 768){
+        experMain.childNodes.forEach(item => {
+            item.childNodes[0].style.width = "35vw";
+        })
+        certifiMain.childNodes.forEach(item => {
+            item.childNodes[0].style.width = '45vw';
+        })
+    }
 
     titleMain.appendChild(main1);
     titleMain.appendChild(main2);
@@ -626,7 +630,8 @@ function init(){
     const titleHeader = document.querySelector('.titleHeader');
     const certifiTitle = document.querySelector('.certifiTitle');
     const experTitle = document.querySelector('.experTitle');
-
+    const experMain = document.querySelector('.experMain');
+    const certifiMain = document.querySelector('.certifiMain');
     window.addEventListener('resize', () => {
         const width = document.documentElement.clientWidth;
         if(width <= 768){
@@ -637,6 +642,12 @@ function init(){
             titleHeader.style.width = 'auto';
             certifiTitle.style.width = 'auto';
             experTitle.style.width = 'auto';
+            experMain.childNodes.forEach(item => {
+                item.childNodes[0].style.width = "35vw";
+            })
+            certifiMain.childNodes.forEach(item => {
+                item.childNodes[0].style.width = '35vw';
+            })
         }
         else{
             topintro.style.left = '60vw';
@@ -646,6 +657,12 @@ function init(){
             titleHeader.style.width = '20vw';
             certifiTitle.style.width = '20vw';
             experTitle.style.width = '20vw';
+            experMain.childNodes.forEach(item => {
+                item.childNodes[0].style.width = "15vw";
+            })
+            certifiMain.childNodes.forEach(item => {
+                item.childNodes[0].style.width = '15vw';
+            })
         }
     })
 }
